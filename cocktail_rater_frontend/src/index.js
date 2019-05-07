@@ -58,8 +58,6 @@ function homePage() {
 }
 
 function navMenu(e, menu) {
-    console.log(e.target)
-    console.log(menu)
     if (menu == 'Home') {
         homePage()
     }
