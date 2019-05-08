@@ -3,6 +3,8 @@ const FULL_HEART = '♥'
 
 const search = document.getElementById('site-search')
 search.addEventListener('submit', siteSearch)
+let form = document.querySelector('#enter-username')
+form.addEventListener('submit', fetchUser)
 
 const navList = document.getElementById('nav-list')
 const mainDisplay = document.getElementById('main-display')
@@ -19,8 +21,25 @@ const usersUrl = `http://localhost:3000/users/`
 
 function siteSearch(e) {
     e.preventDefault()
+    console.log(e.target.query.value)
     e.target.reset()
 }
+
+// ************ modal stuff *****************
+let modal = document.querySelector(".modal");
+let modalContent = modal.querySelector(".modal-content")
+let closeButton = document.querySelector(".close-button");
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+// ************* end modal stuff *******************
 
 function clearNode(node) {
     while(node.firstChild) {
@@ -58,6 +77,14 @@ function homePage() {
     }
     img.className = "center-img"
     mainDisplay.appendChild(img)
+
+    if (user.length == 0) {
+        let p = document.createElement('p')
+        p.innerHTML = `Click <span style="color: blue">here</span> to login.`
+        p.setAttribute('align', 'center')
+        p.addEventListener('click', toggleModal)
+        mainDisplay.appendChild(p)
+    }
 }
 
 function makeNavList() {
@@ -102,13 +129,40 @@ function navMenu(e, menu) {
         getFavorites()
     }
     if (menu == 'Login') {
-        loginUser()
+        toggleModal()
     }
     if (menu == 'Logout') {
         logoutUser()
+        user = []
+        makeNavList()
+        homePage()
     }
+}
+
+function fetchUser(e) {
+    e.preventDefault()
+    toggleModal()
+    console.log(e.target.username.value)
+    fetch(usersUrl)
+    .then(res => res.json())
+    e.target.reset()
+
+}
+
+function newUser(username) {
+    fetch(usersUrl, {
+        headers:{
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify({ name: username })
+    })
+    .then(res => res.json())
+
 }
 
 
 makeNavList()
 homePage()
+
