@@ -1,4 +1,4 @@
-class DrinksController < ApplicationController
+class DrinkIngredientsController < ApplicationController
 
   def index
           @drink = Drink.all
@@ -37,7 +37,36 @@ class DrinksController < ApplicationController
         :glass,
         :videoURL,
         :imageURL,
-        :user_id,
+        :ingredientid_1,
+        :ingredientid_2,
+        :ingredientid_3,
+        :ingredientid_4,
+        :ingredientid_5,
+        :ingredientid_6,
+        :ingredientid_8,
+        :ingredientid_9,
+        :ingredientid_10,
+        :ingredientid_11,
+        :ingredientid_12,
+        :ingredientid_13,
+        :ingredientid_14,
+        :ingredientid_15,
+        :measure1,
+        :measure2,
+        :measure3,
+        :measure4,
+        :measure5,
+        :measure6,
+        :measure7,
+        :measure8,
+        :measure9,
+        :measure10,
+        :measure11,
+        :measure12,
+        :measure13,
+        :measure14,
+        :measure15,
+        :userid,
         :created_at,
         :updated_at)
   end
