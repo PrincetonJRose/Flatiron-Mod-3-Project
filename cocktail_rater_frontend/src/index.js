@@ -22,6 +22,22 @@ function siteSearch(e) {
     e.target.reset()
 }
 
+// ************ modal stuff *****************
+let modal = document.querySelector(".modal");
+let modalContent = modal.querySelector(".modal-content")
+let closeButton = document.querySelector(".close-button");
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+// ************* end modal stuff *******************
+
 function clearNode(node) {
     while(node.firstChild) {
         node.removeChild(node.firstChild)
@@ -58,6 +74,20 @@ function homePage() {
     }
     img.className = "center-img"
     mainDisplay.appendChild(img)
+
+    if (user.length == 0) {
+        let p = document.createElement('p')
+        p.innerHTML = `Click <span style="color: blue">here</span> to login.`
+        p.setAttribute('align', 'center')
+        p.addEventListener('click', loginUser)
+        mainDisplay.appendChild(p)
+
+        let p2 = document.createElement('p')
+        p2.innerHTML = `Click <span style="color: blue">here</span> to register.`
+        p2.setAttribute('align', 'center')
+        p2.addEventListener('click', newUser)
+        mainDisplay.appendChild(p2)
+    }
 }
 
 function makeNavList() {
@@ -106,9 +136,22 @@ function navMenu(e, menu) {
     }
     if (menu == 'Logout') {
         logoutUser()
+        user = []
+        makeNavList()
+        homePage()
     }
 }
 
+function loginUser() {
+    clearNode(modalContent)
+    toggleModal()
+    
+}
+
+function newUser() {
+
+}
 
 makeNavList()
 homePage()
+
