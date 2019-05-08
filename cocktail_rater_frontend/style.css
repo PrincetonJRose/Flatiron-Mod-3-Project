@@ -23,6 +23,11 @@ div.card {
     border-radius: 10px;
 }
 
+/* div.scroll {
+    overflow-x:hidden;
+    overflow-y:auto;
+} */
+
 .card-item {
     text-align: center;
     border: grey solid 1px;
