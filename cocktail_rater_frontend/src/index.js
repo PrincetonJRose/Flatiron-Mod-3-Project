@@ -3,6 +3,8 @@ const FULL_HEART = '♥'
 
 const search = document.getElementById('site-search')
 search.addEventListener('submit', siteSearch)
+let form = document.querySelector('#enter-username')
+form.addEventListener('submit', fetchUser)
 
 const navList = document.getElementById('nav-list')
 const mainDisplay = document.getElementById('main-display')
@@ -19,6 +21,7 @@ const usersUrl = `http://localhost:3000/users/`
 
 function siteSearch(e) {
     e.preventDefault()
+    console.log(e.target.query.value)
     e.target.reset()
 }
 
@@ -79,14 +82,8 @@ function homePage() {
         let p = document.createElement('p')
         p.innerHTML = `Click <span style="color: blue">here</span> to login.`
         p.setAttribute('align', 'center')
-        p.addEventListener('click', loginUser)
+        p.addEventListener('click', toggleModal)
         mainDisplay.appendChild(p)
-
-        let p2 = document.createElement('p')
-        p2.innerHTML = `Click <span style="color: blue">here</span> to register.`
-        p2.setAttribute('align', 'center')
-        p2.addEventListener('click', newUser)
-        mainDisplay.appendChild(p2)
     }
 }
 
@@ -132,7 +129,7 @@ function navMenu(e, menu) {
         getFavorites()
     }
     if (menu == 'Login') {
-        loginUser()
+        toggleModal()
     }
     if (menu == 'Logout') {
         logoutUser()
@@ -142,15 +139,29 @@ function navMenu(e, menu) {
     }
 }
 
-function loginUser() {
-    clearNode(modalContent)
+function fetchUser(e) {
+    e.preventDefault()
     toggleModal()
-    
+    console.log(e.target.username.value)
+    fetch(usersUrl)
+    .then(res => res.json())
+    e.target.reset()
+
 }
 
-function newUser() {
+function newUser(username) {
+    fetch(usersUrl, {
+        headers:{
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify({ name: username })
+    })
+    .then(res => res.json())
 
 }
+
 
 makeNavList()
 homePage()
