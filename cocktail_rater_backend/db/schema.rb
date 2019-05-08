@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 2019_05_08_175754) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "drink_ingredients", force: :cascade do |t|
+    t.integer "drink_id"
+    t.integer "ingredient_id"
+    t.text "measurement"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "drinks", force: :cascade do |t|
     t.integer "drink_api_id"
     t.string "name"

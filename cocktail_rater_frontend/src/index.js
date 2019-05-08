@@ -149,14 +149,14 @@ function fetchUser(e) {
 
 }
 
-function newUser(username) {
+function newUser(name) {
     fetch(usersUrl, {
         headers:{
             "Content-Type": "application/json",
             Accept: "application/json"
         },
         method: 'POST',
-        body: JSON.stringify({ name: username })
+        body: JSON.stringify({ username: name })
     })
     .then(res => res.json())
 
