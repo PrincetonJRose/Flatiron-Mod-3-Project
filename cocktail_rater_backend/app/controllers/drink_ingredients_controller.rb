@@ -30,5 +30,5 @@ class DrinkIngredientsController < ApplicationController
     def drink_params
         params.permit(:user_id, :drink_id)
     end
-
+  
 end
