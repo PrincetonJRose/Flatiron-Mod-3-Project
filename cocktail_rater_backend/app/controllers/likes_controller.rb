@@ -26,6 +26,7 @@ class LikesController < ApplicationController
       render json: @like, status: :updated
     else
       render json: {errors: @like.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def destroy

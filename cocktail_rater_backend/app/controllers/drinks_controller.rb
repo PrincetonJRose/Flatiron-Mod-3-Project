@@ -1,7 +1,7 @@
 class DrinksController < ApplicationController
 
   def index
-          @drink = Drink.all
+          @drinks = Drink.all
           render json: @drinks, status: :ok
   end
 
