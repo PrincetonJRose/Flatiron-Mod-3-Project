@@ -14,6 +14,7 @@ mainDisplay.style.height = '600px'
 mainDisplay.style.float = 'right'
 
 let user = []
+let users = []
 
 const cocktailsUrl = `http://localhost:3000/cocktails/`
 const ingredientsUrl = `http://localhost:3000/ingredients/`
@@ -144,7 +145,7 @@ function fetchUser(e) {
     toggleModal()
     console.log(e.target.username.value)
     fetch(usersUrl)
-    .then(res => res.json())
+    .then(res => console.log(res.json()))
     e.target.reset()
 
 }
