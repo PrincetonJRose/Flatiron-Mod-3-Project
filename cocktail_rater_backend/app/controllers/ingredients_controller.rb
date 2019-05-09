@@ -2,12 +2,12 @@ class IngredientsController < ApplicationController
 
   def index
     @ingredients = Ingredient.all
-    render json: @books, status: :ok
+    render json: @ingredients, status: :ok
   end
 
   def show
     @ingredients = Ingredient.find(params[:id])
-    render json: @book, status: :ok
+    render json: @ingredients, status: :ok
   end
 
   def create
@@ -25,6 +25,7 @@ class IngredientsController < ApplicationController
       render json: @ingredient, status: :updated
     else
       render json: {errors: @ingredient.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def destroy
